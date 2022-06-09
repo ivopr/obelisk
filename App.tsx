@@ -1,3 +1,4 @@
+import "react-native-get-random-values";
 import "expo-dev-client";
 
 import * as SplashScreen from "expo-splash-screen";

@@ -4,11 +4,13 @@ import React from "react";
 
 import { AuthStore } from "./auth";
 import { CounterStore } from "./counter";
+import { TaskStore } from "./task";
 import { UIStore } from "./ui";
 
 export const stores = {
   auth: new AuthStore(),
   counter: new CounterStore(),
+  task: new TaskStore(),
   ui: new UIStore(),
 };
 type ContextStores = typeof stores;

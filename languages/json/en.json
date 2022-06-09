@@ -6,5 +6,17 @@
   "screens": {
     "tasks": "Tasks",
     "user-detail": "I, %{username}"
+  },
+  "tasks": {
+    "actions": {
+      "check": "Check",
+      "delete": "Delete",
+      "uncheck": "Uncheck"
+    },
+    "headline": {
+      "one": "You have 1 incomplete task",
+      "other": "You have %{count} incomplete tasks",
+      "zero": "Hey, what about a new task?"
+    }
   }
 }

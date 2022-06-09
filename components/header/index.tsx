@@ -2,12 +2,13 @@ import { Feather } from "@native-base/icons";
 import auth, { FirebaseAuthTypes } from "@react-native-firebase/auth";
 import { GoogleSignin } from "@react-native-google-signin/google-signin";
 import { observer } from "mobx-react";
-import { Avatar, Heading, HStack, Icon } from "native-base";
+import { Avatar, Heading, HStack } from "native-base";
 import React from "react";
 
 import { translate } from "../../languages";
 import { useStores } from "../../stores";
 import { Button } from "../button";
+import { Icon } from "../icon";
 
 type HeaderProps = {
   name: keyof NativeStackParams;
