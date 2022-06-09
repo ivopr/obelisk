@@ -1,5 +1,5 @@
 import { observer } from "mobx-react";
-import { Fab, Heading } from "native-base";
+import { Box, Fab, Heading, VStack } from "native-base";
 import React from "react";
 import { v4 } from "uuid";
 
@@ -13,14 +13,28 @@ export const Tasks: React.FC = observer(() => {
 
   return (
     <Screen paddingX="0" space="xs">
-      <Heading size="sm" textAlign="center">
-        {translate("tasks.headline", { count: task.incompleteCount })}
-      </Heading>
-      <TaskList
-        tasks={task.incompleteFirst}
-        deleteTask={task.deleteTask}
-        toggleTaskCompletion={task.toggleTaskCompletion}
-      />
+      {task.count > 0 ? (
+        <>
+          <Heading size="sm" textAlign="center">
+            {translate("tasks.headline", { count: task.incompleteCount })}
+          </Heading>
+          <TaskList
+            tasks={task.incompleteFirst}
+            deleteTask={task.deleteTask}
+            toggleTaskCompletion={task.toggleTaskCompletion}
+          />
+        </>
+      ) : (
+        <VStack
+          alignItems="center"
+          height="full"
+          justifyContent="center"
+          space="md"
+        >
+          <Icon color="black" name="layers" size="5xl" />
+          <Heading size="lg">{translate("tasks.headline.zero")}</Heading>
+        </VStack>
+      )}
       <Fab
         backgroundColor="black"
         icon={<Icon name="plus" />}
