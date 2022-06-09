@@ -3,7 +3,7 @@ import { Fab, Heading } from "native-base";
 import React from "react";
 import { v4 } from "uuid";
 
-import { Button, Icon, Screen } from "../../components";
+import { Icon, Screen } from "../../components";
 import { translate } from "../../languages";
 import { useStores } from "../../stores";
 import { TaskList } from "./swipe-list";
@@ -22,6 +22,7 @@ export const Tasks: React.FC = observer(() => {
         toggleTaskCompletion={task.toggleTaskCompletion}
       />
       <Fab
+        backgroundColor="black"
         icon={<Icon name="plus" />}
         onPress={() =>
           task.addTask({ completed: false, id: v4(), title: "test" })
