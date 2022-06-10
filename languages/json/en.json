@@ -17,6 +17,15 @@
       "one": "You have 1 incomplete task",
       "other": "You have %{count} incomplete tasks",
       "zero": "Hey, what about a new task?"
+    },
+    "item": {
+      "completed-at": "Completed at",
+      "created-at": "Created at",
+      "today": "Today"
+    },
+    "status": {
+      "complete": "Complete",
+      "incomplete": "Incomplete"
     }
   }
 }

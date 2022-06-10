@@ -1,11 +1,38 @@
 import { makeAutoObservable } from "mobx";
 import { hydrateStore, makePersistable } from "mobx-persist-store";
 
+type TaskSections = {
+  title: "complete" | "incomplete";
+  data: Task[];
+}[];
 export class TaskStore implements IStore {
   tasks: Task[] = [];
 
   get count(): number {
     return this.tasks.length;
+  }
+
+  get sectionListData(): TaskSections {
+    const incomplete = this.tasks.filter((task) => task.completed === false);
+    const complete = this.tasks.filter((task) => task.completed === true);
+
+    const sections: TaskSections = [];
+
+    if (incomplete.length > 0) {
+      sections.push({
+        title: "incomplete",
+        data: incomplete,
+      });
+    }
+
+    if (complete.length > 0) {
+      sections.push({
+        title: "complete",
+        data: complete,
+      });
+    }
+
+    return sections;
   }
 
   get incompleteCount(): number {
@@ -41,6 +68,14 @@ export class TaskStore implements IStore {
       this.tasks.findIndex((task) => task.id === v),
       1
     );
+  };
+
+  changeTaskCompletedAt = (v: string, date: Date) => {
+    const task = this.tasks.find((task) => task.id === v);
+
+    if (task) {
+      task.completedAt = date;
+    }
   };
 
   toggleTaskCompletion = (v: string) => {

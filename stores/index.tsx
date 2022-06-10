@@ -16,7 +16,7 @@ export const stores = {
 type ContextStores = typeof stores;
 
 const storeContext = React.createContext<ContextStores>(stores);
-export const StoresProvider = ({ children }: any) => (
+export const StoresProvider: React.FC = ({ children }) => (
   <storeContext.Provider value={stores}>{children}</storeContext.Provider>
 );
 
