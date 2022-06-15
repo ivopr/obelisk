@@ -1,13 +1,23 @@
-type Task = {
-  id: string;
-  title: string;
-  completed: boolean;
-  createdAt: Date;
-  completedAt?: Date;
-  description?: string;
-  icon?: string;
-};
+import icons from "@expo/vector-icons/build/vendor/react-native-vector-icons/glyphmaps/Feather.json";
 
-type ListData = {
-  item: Task;
-};
+declare global {
+  type Task = {
+    id: string;
+    title: string;
+    completed: boolean;
+    createdAt: Date;
+    completedAt?: Date;
+    description?: string;
+    icon?: keyof typeof icons;
+  };
+
+  type CreateTaskData = {
+    title: string;
+    description: string;
+    icon: keyof typeof icons;
+  };
+
+  type ListData = {
+    item: Task;
+  };
+}

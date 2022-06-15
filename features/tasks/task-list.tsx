@@ -63,7 +63,7 @@ export const TaskList: React.FC = observer(() => {
                 {item.title}
               </Text>
               <HStack space="2.5" width="full">
-                {item.description && (
+                {item.description ? (
                   <Text
                     color="coolGray.600"
                     isTruncated
@@ -73,7 +73,7 @@ export const TaskList: React.FC = observer(() => {
                   >
                     {item.description}
                   </Text>
-                )}
+                ) : null}
                 <HStack marginLeft="auto" space="3">
                   <VStack space="-1.5">
                     <Heading fontSize="xs">
@@ -90,7 +90,7 @@ export const TaskList: React.FC = observer(() => {
                       )}
                     </Text>
                   </VStack>
-                  {item.completed && item.completedAt && (
+                  {item.completed && item.completedAt ? (
                     <VStack space="-1.5">
                       <Heading fontSize="xs">
                         {translate("tasks.item.completed-at")}
@@ -106,7 +106,7 @@ export const TaskList: React.FC = observer(() => {
                         )}
                       </Text>
                     </VStack>
-                  )}
+                  ) : null}
                 </HStack>
               </HStack>
             </VStack>
@@ -120,8 +120,23 @@ export const TaskList: React.FC = observer(() => {
     <HStack
       backgroundColor={item.completed ? "green.300" : "coolGray.200"}
       flex={1}
-      justifyContent="flex-end"
     >
+      <Pressable
+        _pressed={{
+          opacity: 0.5,
+        }}
+        backgroundColor="red.400"
+        justifyContent="center"
+        onPress={() => deleteItem(rowMap, item.id)}
+        width="70"
+      >
+        <VStack alignItems="center" space={2}>
+          <Icon color="white" name="trash" size="xs" />
+          <Text color="white" fontSize="xs" fontWeight="medium">
+            {translate("tasks.actions.delete")}
+          </Text>
+        </VStack>
+      </Pressable>
       <Pressable
         _pressed={{
           opacity: 0.5,
@@ -137,22 +152,6 @@ export const TaskList: React.FC = observer(() => {
             {translate(
               item.completed ? "tasks.actions.uncheck" : "tasks.actions.check"
             )}
-          </Text>
-        </VStack>
-      </Pressable>
-      <Pressable
-        _pressed={{
-          opacity: 0.5,
-        }}
-        backgroundColor="red.400"
-        justifyContent="center"
-        onPress={() => deleteItem(rowMap, item.id)}
-        width="70"
-      >
-        <VStack alignItems="center" space={2}>
-          <Icon color="white" name="trash" size="xs" />
-          <Text color="white" fontSize="xs" fontWeight="medium">
-            {translate("tasks.actions.delete")}
           </Text>
         </VStack>
       </Pressable>
@@ -182,21 +181,21 @@ export const TaskList: React.FC = observer(() => {
 
   return (
     <SwipeListView
-      disableRightSwipe
-      disableHiddenLayoutCalculation
+      disableLeftSwipe
       sections={task.sectionListData}
       ItemSeparatorComponent={Divider}
       keyExtractor={keyExtractor}
+      SectionSeparatorComponent={Divider}
       previewDuration={500}
       previewRowIndex={0}
       previewRepeat
       previewRepeatDelay={30000}
-      previewOpenValue={-25}
+      previewOpenValue={25}
       renderHiddenItem={renderHiddenItem}
       renderItem={renderItem}
       renderSectionHeader={sectionHeader}
       ListEmptyComponent={listEmpty}
-      rightOpenValue={-140}
+      leftOpenValue={140}
       useSectionList
     />
   );
